@@ -157,11 +157,12 @@ HAL_StatusTypeDef MS5611_Init(MS5611 *dev, I2C_HandleTypeDef *i2cHandle){
 int MS5611_GetTemp(MS5611 *dev){
 
     MS5611_WriteCommand(dev, dev->D2_OSR);
-    HAL_Delay(2500);
+    HAL_Delay(250);
 
     uint8_t buff[3];
     MS5611_ReadRegisters(dev, MS5611_ADC_READ, buff, 3);
 
+    dev->D2 = 0;
     dev->D2 = dev->D2<<8 | buff[0];
     dev->D2 = dev->D2<<8 | buff[1];
     dev->D2 = dev->D2<<8 | buff[2];
@@ -192,35 +193,37 @@ int MS5611_GetPressure(MS5611 *dev){
 	uint8_t buff[3];
 
     MS5611_WriteCommand(dev, dev->D1_OSR);
-    HAL_Delay(2500);
+    HAL_Delay(250);
 
 
     MS5611_ReadRegisters(dev, MS5611_ADC_READ, buff, 3);
 
+    dev->D1 = 0;
     dev->D1 = dev->D1<<8 | buff[0];
     dev->D1 = dev->D1<<8 | buff[1];
     dev->D1 = dev->D1<<8 | buff[2];
 
     MS5611_WriteCommand(dev, dev->D2_OSR);
-    HAL_Delay(2500);
+    HAL_Delay(250);
 
     buff[0]=0,buff[1]=0,buff[2]=0;
     MS5611_ReadRegisters(dev, MS5611_ADC_READ, buff, 3);
 
+    dev->D2 = 0;
     dev->D2 = dev->D2<<8 | buff[0];
     dev->D2 = dev->D2<<8 | buff[1];
     dev->D2 = dev->D2<<8 | buff[2];
 
     dT = dev->D2 - ((int)dev->C5 << 8);
-    temp = (2000 + (((int64_t)dT * (int64_t)dev->C6) >> 23));
+    int tmp = (2000 + (((int64_t)dT * (int64_t)dev->C6) >> 23));
 
-    if(temp<2000){
+    if(tmp<2000){
     	T2=pow(dT,2)/2147483648;
-    	OFF2=5*pow((temp-2000),2)/2;
-    	SENS2=5*pow((temp-2000),2)/4;
-    	if(temp<-1500){
-    		OFF2=OFF2+7*pow((temp+1500),2);
-    		SENS2=SENS2+11*pow((temp+1500),2)/2;
+    	OFF2=5*pow((tmp-2000),2)/2;
+    	SENS2=5*pow((tmp-2000),2)/4;
+    	if(tmp<-1500){
+    		OFF2=OFF2+7*pow((tmp+1500),2);
+    		SENS2=SENS2+11*pow((tmp+1500),2)/2;
     	}
 	}
 	else{

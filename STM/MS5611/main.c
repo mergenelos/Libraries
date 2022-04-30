@@ -105,15 +105,14 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  char buff[50];
+  char buff[35];
+  float temp, pressure;
   while (1){
 
-
-	  float temp = (float) MS5611_GetTemp(&dev)/100 ;
-	  float pressure = (float) MS5611_GetPressure(&dev)/100 ;
-	  sprintf(buff,"temp = %.2f  pressure = %.2f \r\n" , temp, pressure);
-	  HAL_UART_Transmit(&huart1, (uint8_t *)buff,  sizeof(buff), 100);
-
+    temp = (float) MS5611_GetTemp(&dev) /100;
+    pressure = (float) MS5611_GetPressure(&dev) /100;
+    sprintf(buff,"temp = %.2f pressure = %.2f \r\n", temp, pressure);
+    HAL_UART_Transmit(&huart1, (uint8_t *)buff, sizeof(buff), 100);
 
 	  HAL_GPIO_TogglePin(usrLED_GPIO_Port, usrLED_Pin);
 	  HAL_Delay(1000);
