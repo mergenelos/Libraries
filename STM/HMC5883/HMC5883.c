@@ -226,14 +226,3 @@ HAL_StatusTypeDef HMC5883_ReadXYZ(HMC5883 *dev){
 	return HAL_OK;
 
 }
-
-
-
-
-
-
-
-
-
-
-
