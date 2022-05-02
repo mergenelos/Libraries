@@ -22,7 +22,6 @@
 #ifndef INC_HMC5883_H_
 #define INC_HMC5883_H_
 
-
 #include "stm32f1xx_hal.h"
 
 #define HMC5883_DEFAULT_ADDR  	0x3C		//0x1E << 1
@@ -134,7 +133,6 @@
 		HMC5883_i2c_LS	= 	0x00,
 	};
 
-
 /*
  * 	Mode Select Bits. These bits select the
  *	operation mode of this device.
@@ -218,21 +216,21 @@
  */
 typedef struct{
 
-	uint16_t X;	//The measurement result from channel X
-	uint16_t Y;	//The measurement result from channel Y
-	uint16_t Z;	//The measurement result from channel Z
+	uint8_t samplesAveraged;		//MA1 - MA0
+	uint8_t dataRate;				//DO2 - DO0
+	uint8_t measurConf;				//MS1 - MS0
+	uint8_t gainConf;				//GN2 - GN0
+	uint8_t mode;					//MD1 - MD0
 
-	uint8_t samplesAveraged;	//MA1 - MA0
-	uint8_t dataRate;			//DO2 - DO0
-	uint8_t measurConf;			//MS1 - MS0
-	uint8_t gainConf;			//GN2 - GN0
-	uint8_t mode;				//MD1 - MD0
-
-	I2C_HandleTypeDef  *i2cHandle; //i3c handle to talk to device
+	I2C_HandleTypeDef  *i2cHandle; 	//i3c handle to talk to device
 	uint8_t 			addr; 		//Device address on i2c buss
 
 	uint32_t 			memSize; 	//Memory size of HMC5883 is 8 bits
 	uint32_t 			timeout; 	//i2c timeout to talk to device
+
+	uint16_t X;						//The measurement result from channel X
+	uint16_t Y;						//The measurement result from channel Y
+	uint16_t Z;						//The measurement result from channel Z
 
 }HMC5883;
 
