@@ -11,7 +11,7 @@
  *			   ░         ░  ░░  ░      ░  ░   ░         ░  ░ ░  ░  ░
  *
  *
- *  	Created on: May 1, 2022
+ *  	Created on:	May 1, 2022
  *  	Author: 	Murtaza Asaadi
  *  	License: 	GPL v.2
  *  	Github: 	https://github.com/makerlik
@@ -19,15 +19,14 @@
  *  	Basic library to setup and communicate with HMC5883 three-axis digital compass
  */
 
-
 #include "HMC5883.h"
 #include "math.h"
 
 /*
  * Load up device default settings
  *
- * input: HMC5883 struct instance
- * output: HAL_OK if no errors happen
+ *	input: HMC5883 struct instance
+ *	output: HAL_OK if no errors happen
  */
 HAL_StatusTypeDef HMC5883_Defaults(HMC5883 *dev){
 
@@ -60,10 +59,10 @@ HAL_StatusTypeDef HMC5883_Defaults(HMC5883 *dev){
 /*
  * A wrapper function to make working with HAL_I2C_Mem_Read easier
  *
- * input: HMC5883 struct instance, Register address to be read,\
- * 		 A reference to a 8 bit variable to write retrieved register to
+ *	input: HMC5883 struct instance, Register address to be read,\
+ *		A reference to a 8 bit variable to write retrieved register to
  *
- * 	output: returns the status of HAL_I2C_Mem_Read
+ *	output: returns the status of HAL_I2C_Mem_Read
  */
 HAL_StatusTypeDef HMC5883_ReadRegister(HMC5883 *dev, uint8_t reg, uint8_t *data){
 
@@ -74,11 +73,11 @@ HAL_StatusTypeDef HMC5883_ReadRegister(HMC5883 *dev, uint8_t reg, uint8_t *data)
 /*
  * A wrapper function to make working with HAL_I2C_Mem_Read easier
  *
- * input: HMC5883 struct instance, Register address to be read,\
- * 		 A reference to a 8 bit variable to write retrieved register to,
- * 		 length of the data (number of registers to be read)
+ *	input: HMC5883 struct instance, Register address to be read,\
+ *		A reference to a 8 bit variable to write retrieved register to,
+ *		length of the data (number of registers to be read)
  *
- * 	output: returns the status of HAL_I2C_Mem_Read
+ *	output: returns the status of HAL_I2C_Mem_Read
  */
 HAL_StatusTypeDef HMC5883_ReadRegisters(HMC5883 *dev, uint8_t reg, uint8_t *data, uint8_t len){
 
@@ -89,10 +88,10 @@ HAL_StatusTypeDef HMC5883_ReadRegisters(HMC5883 *dev, uint8_t reg, uint8_t *data
 /*
  * A wrapper function to make working with HAL_I2C_Mem_Write easier
  *
- * input: HMC5883 struct instance, Register address to be written,\
- * 		 A reference to a 8 bit variable to write into the register
+ *	input: HMC5883 struct instance, Register address to be written,\
+ *		A reference to a 8 bit variable to write into the register
  *
- * 	output: returns the status of HAL_I2C_Mem_Write
+ *	output: returns the status of HAL_I2C_Mem_Write
  */
 HAL_StatusTypeDef HMC5883_WriteRegister(HMC5883 *dev, uint8_t reg, uint8_t *data){
 
@@ -103,9 +102,9 @@ HAL_StatusTypeDef HMC5883_WriteRegister(HMC5883 *dev, uint8_t reg, uint8_t *data
 /*
  * A wrapper function to make working with  HAL_I2C_Master_Transmit easier
  *
- * input: HMC5883 struct instance, Command to be written
+ *	input: HMC5883 struct instance, Command to be written
  *
- * 	output: returns the status of HAL_I2C_Mem_Write
+ *	output: returns the status of HAL_I2C_Mem_Write
  */
 HAL_StatusTypeDef HMC5883_WriteCommand(HMC5883 *dev, uint8_t cmd){
 
@@ -117,9 +116,9 @@ HAL_StatusTypeDef HMC5883_WriteCommand(HMC5883 *dev, uint8_t cmd){
 /*
  * A wrapper function to make working with  HAL_I2C_Master_Receive easier
  *
- * input: HMC5883 struct instance, data will returned in this, data buffer size to be read
+ *	input: HMC5883 struct instance, data will returned in this, data buffer size to be read
  *
- * 	output: returns the status of HAL_I2C_Mem_Write
+ *	output: returns the status of HAL_I2C_Mem_Write
  */
 HAL_StatusTypeDef HMC5883_ReadCommand(HMC5883 *dev, uint8_t *data, uint8_t len){
 
@@ -130,9 +129,9 @@ HAL_StatusTypeDef HMC5883_ReadCommand(HMC5883 *dev, uint8_t *data, uint8_t len){
 /*
  * Initialize HMC5883, Read and identify device, write configuration registers
  *
- * input: HMC5883 struct instance , i2c handle which the device is on
+ *	input: HMC5883 struct instance , i2c handle which the device is on
  *
- * 	output: returns the status based on HAL_StatusTypeDef
+ *	output: returns the status based on HAL_StatusTypeDef
  */
 HAL_StatusTypeDef HMC5883_Init(HMC5883 *dev, I2C_HandleTypeDef *i2cHandle){
 
@@ -170,9 +169,9 @@ HAL_StatusTypeDef HMC5883_Init(HMC5883 *dev, I2C_HandleTypeDef *i2cHandle){
  * Get X,Y,Z values from HMC5883 without checking the status reg
  * can be used when using interrupts and DRDY pin
  *
- * input: HMC5883 struct instance
+ *	input: HMC5883 struct instance
  *
- * output: returns the status based on HAL_StatusTypeDef
+ *	output: returns the status based on HAL_StatusTypeDef
  */
 HAL_StatusTypeDef HMC5883_ReadXYZ_IT(HMC5883 *dev){
 
@@ -203,9 +202,9 @@ HAL_StatusTypeDef HMC5883_ReadXYZ_IT(HMC5883 *dev){
  * Get X,Y,Z values from HMC5883 by pulling and
  * monitoring the STATUS register
  *
- * input: HMC5883 struct instance
+ *	input: HMC5883 struct instance
  *
- * output: returns the status based on HAL_StatusTypeDef
+ *	output: returns the status based on HAL_StatusTypeDef
  */
 HAL_StatusTypeDef HMC5883_ReadXYZ(HMC5883 *dev){
 

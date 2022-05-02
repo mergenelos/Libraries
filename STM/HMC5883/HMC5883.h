@@ -11,7 +11,7 @@
  *			   ░         ░  ░░  ░      ░  ░   ░         ░  ░ ░  ░  ░
  *
  *
- *  	Created on: May 1, 2022
+ *  	Created on:	May 1, 2022
  *  	Author: 	Murtaza Asaadi
  *  	License: 	GPL v.2
  *  	Github: 	https://github.com/makerlik
@@ -29,15 +29,15 @@
 #define HMC5883_CONF_REG_A		0x00		//Read/Write
 #define HMC5883_CONF_REG_A_MASK	0x7F		//Valid bits of the register A
 
-/*
- *	Select number of samples averaged (1 to 8)
- *	per measurement output.
- *	MA10
- *	00 = 1(Default);
- *	01 = 2;
- *	10 = 4;
- *	11 = 8
-*/
+	/*
+	 * Select number of samples averaged (1 to 8)
+	 * per measurement output.
+	 * MA10
+	 * 00 = 1(Default);
+	 * 01 = 2;
+	 * 10 = 4;
+	 * 11 = 8
+	*/
 	#define HMC5883_CONF_REG_A_MA1		0x40
 	#define HMC5883_CONF_REG_A_MA0		0x20
 	enum  HMC5883_samplesAveraged {
@@ -47,19 +47,19 @@
 		HMC5883_SA_8 = 0x60,
 	};
 
-/*
- *	Data Output Rate Bits. These bits set the rate at which data
- *	is written to all three data output registers.
- *	D210 - Typical Data Output Rate (Hz)
- *	000 = 0.75Hz
- *	001 = 1.5Hz
- *	010 = 3Hz
- *	011 = 7.5Hz
- *	100 = 15Hz (Default)
- *	101 = 30Hz
- *	110 = 75Hz
- *	111 = Reserved
-*/
+	/*
+	 * Data Output Rate Bits. These bits set the rate at which data
+	 * is written to all three data output registers.
+	 * D210 - Typical Data Output Rate (Hz)
+	 * 000 = 0.75Hz
+	 * 001 = 1.5Hz
+	 * 010 = 3Hz
+	 * 011 = 7.5Hz
+	 * 100 = 15Hz (Default)
+	 * 101 = 30Hz
+	 * 110 = 75Hz
+	 * 111 = Reserved
+	*/
 	#define HMC5883_CONF_REG_A_DO2		0x10
 	#define HMC5883_CONF_REG_A_DO1		0x08
 	#define HMC5883_CONF_REG_A_DO0		0x04
@@ -73,16 +73,16 @@
 		HMC5883_DR_75Hz 	= 	0x18,
 	};
 
-/*
- *	Measurement Configuration Bits. These bits define the
- *	measurement flow of the device, specifically whether or not
- *	to incorporate an applied bias into the measurement.
- *	MS10 - Measurement Mode
- *	00 = Normal measurement configuration
- *	01 = Positive bias configuration for X, Y, and Z axes.
- *	10 = Negative bias configuration for X, Y and Z axes.
- *	11 = This configuration is reserved.
-*/
+	/*
+	 * Measurement Configuration Bits. These bits define the
+	 * measurement flow of the device, specifically whether or not
+	 * to incorporate an applied bias into the measurement.
+	 * MS10 - Measurement Mode
+	 * 00 = Normal measurement configuration
+	 * 01 = Positive bias configuration for X, Y, and Z axes.
+	 * 10 = Negative bias configuration for X, Y and Z axes.
+	 * 11 = This configuration is reserved.
+	*/
 	#define HMC5883_CONF_REG_A_MS1		0x02
 	#define HMC5883_CONF_REG_A_MS0		0x01
 	enum  HMC5883_measureConf {
@@ -94,20 +94,20 @@
 #define HMC5883_CONF_REG_B		0x01		//Read/Write
 #define HMC5883_CONF_REG_B_MASK	0xE0		//Valid bits of the register B
 
-/*
- *	Gain Configuration Bits. These bits configure the gain for
- *	the device. The gain configuration is common for all
- *	channels.
- *	G210 - Recommended Sensor Field Range - Gain - Digital Resolution	- Output Range
- *	000 = ± 0.88 Ga	1370	0.73	0xF800–0x07FF(2048–2047 )
- *	001 = ± 1.3 Ga	1090 	0.92	0xF800–0x07FF(2048–2047 )	//Default
- *	010 = ± 1.9 Ga	820		1.22	0xF800–0x07FF(2048–2047 )
- *	011 = ± 2.5 Ga	660		1.52	0xF800–0x07FF(2048–2047 )
- *	100 = ± 4.0 Ga	440		2.27	0xF800–0x07FF(2048–2047 )
- *	101 = ± 4.7 Ga	390		2.56	0xF800–0x07FF(2048–2047 )
- *	110 = ± 5.6 Ga	330		3.03	0xF800–0x07FF(2048–2047 )
- *	111 = ± 8.1 Ga	230		4.35	0xF800–0x07FF(2048–2047 )
-*/
+	/*
+	 * Gain Configuration Bits. These bits configure the gain for
+	 * the device. The gain configuration is common for all
+	 * channels.
+	 * G210 - Recommended Sensor Field Range - Gain - Digital Resolution	- Output Range
+	 * 000 = ± 0.88 Ga	1370	0.73	0xF800–0x07FF(2048–2047 )
+	 * 001 = ± 1.3 Ga	1090 	0.92	0xF800–0x07FF(2048–2047 )	//Default
+	 * 010 = ± 1.9 Ga	820		1.22	0xF800–0x07FF(2048–2047 )
+	 * 011 = ± 2.5 Ga	660		1.52	0xF800–0x07FF(2048–2047 )
+	 * 100 = ± 4.0 Ga	440		2.27	0xF800–0x07FF(2048–2047 )
+	 * 101 = ± 4.7 Ga	390		2.56	0xF800–0x07FF(2048–2047 )
+	 * 110 = ± 5.6 Ga	330		3.03	0xF800–0x07FF(2048–2047 )
+	 * 111 = ± 8.1 Ga	230		4.35	0xF800–0x07FF(2048–2047 )
+	*/
 	#define HMC5883_CONF_REG_B_GN2		0x80
 	#define HMC5883_CONF_REG_B_GN1		0x40
 	#define HMC5883_CONF_REG_B_GN0		0x20
@@ -133,15 +133,15 @@
 		HMC5883_i2c_LS	= 	0x00,
 	};
 
-/*
- * 	Mode Select Bits. These bits select the
- *	operation mode of this device.
- *	MD10 - Operating Mode
- *	00 = Continuous-Measurement Mode.
- *	01 = Single-Measurement Mode (Default).
- *	10 = Idle Mode. Device is placed in idle mode.
- *	11 = Idle Mode. Device is placed in idle mode.
-*/
+	/*
+	 * Mode Select Bits. These bits select the
+	 * operation mode of this device.
+	 * MD10 - Operating Mode
+	 * 00 = Continuous-Measurement Mode.
+	 * 01 = Single-Measurement Mode (Default).
+	 * 10 = Idle Mode. Device is placed in idle mode.
+	 * 11 = Idle Mode. Device is placed in idle mode.
+	*/
 	#define HMC5883_MODE_REG_MR1		0x02
 	#define HMC5883_MODE_REG_MR0		0x01
 	enum  HMC5883_OPMode{
@@ -179,30 +179,31 @@
 #define HMC5883_STATUS_REG		0x09		//Read
 #define HMC5883_STATUS_REG_MASK 0x03
 
-/*
- *  Data output register lock. This bit is set when:
- *	1.some but not all for of the six data output registers have
- *	been read,
- *	2. Mode register has been read.
- *	When this bit is set, the six data output registers are locked
- *	and any new data will not be placed in these register until
- *	one of these conditions are met:
- *	1.all six bytes have been read, 2. the mode register is
- *	changed,
- *	3. the measurement configuration (CRA) is changed,
- *	4. power is reset.
-*/
+	/*
+	 * Data output register lock. This bit is set when:
+	 *		1.some but not all for of the six data output registers have
+	 *			been read,
+	 *		2. Mode register has been read.
+	 *			When this bit is set, the six data output registers are locked
+	 *			and any new data will not be placed in these register until
+	 * one of these conditions are met:
+	 *		1.all six bytes have been read,
+	 *		2. the mode register is
+	 *			changed,
+	 *		3. the measurement configuration (CRA) is changed,
+	 *		4. power is reset.
+	*/
 	#define HMC5883_STATUS_REG_SR1		0x02
 
-/*
- *	Ready Bit. Set when data is written to all six data registers.
- *	Cleared when device initiates a write to the data output
- *	registers and after one or more of the data output registers
- *	are written to. When RDY bit is clear it shall remain cleared
- *	for a 250us. DRDY pin can be used as an alternative to
- *	the status register for monitoring the device for
- *	measurement data
-*/
+	/*
+	 * Ready Bit. Set when data is written to all six data registers.
+	 * Cleared when device initiates a write to the data output
+	 * registers and after one or more of the data output registers
+	 * are written to. When RDY bit is clear it shall remain cleared
+	 * for a 250us. DRDY pin can be used as an alternative to
+	 * the status register for monitoring the device for
+	 * measurement data
+	*/
 	#define HMC5883_STATUS_REG_SR0		0x01
 
 #define HMC5883_IDENT_REG_A		0x10		//Read - Must contain 0x48
@@ -211,7 +212,7 @@
 
 /*
  * Structure used to create a device instance of HMC5883
- * with all the required configuration to run the device
+ * with all the required configuration to run the device.
  * all the read X,Y,Z values will be stored here too.
  */
 typedef struct{

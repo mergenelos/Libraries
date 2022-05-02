@@ -1,8 +1,22 @@
 /*
- * MS5611.c
  *
- *  Created on: Apr 26, 2022
- *      Author: mak
+ *		 ███▄ ▄███▓ ▄▄▄       ██ ▄█▀▓█████  ██▀███   ██▓     ██▓ ██ ▄█▀
+ *		▓██▒▀█▀ ██▒▒████▄     ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒▓██▒    ▓██▒ ██▄█▒
+ *		▓██    ▓██░▒██  ▀█▄  ▓███▄░ ▒███   ▓██ ░▄█ ▒▒██░    ▒██▒▓███▄░
+ *		▒██    ▒██ ░██▄▄▄▄██ ▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄  ▒██░    ░██░▓██ █▄
+ *		▒██▒   ░██▒ ▓█   ▓██▒▒██▒ █▄░▒████▒░██▓ ▒██▒░██████▒░██░▒██▒ █▄
+ *		░ ▒░   ░  ░ ▒▒   ▓▒█░▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░░ ▒░▓  ░░▓  ▒ ▒▒ ▓▒
+ *		░  ░      ░  ▒   ▒▒ ░░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░░ ░ ▒  ░ ▒ ░░ ░▒ ▒░
+ *		░      ░     ░   ▒   ░ ░░ ░    ░     ░░   ░   ░ ░    ▒ ░░ ░░ ░
+ *			   ░         ░  ░░  ░      ░  ░   ░         ░  ░ ░  ░  ░
+ *
+ *
+ *  	Created on:	Apr 26, 2022
+ *  	Author: 	Murtaza Asaadi
+ *  	License: 	GPL v.2
+ *  	Github: 	https://github.com/makerlik
+ *
+ *  	Basic library to setup and communicate with HMC5883 three-axis digital compass
  */
 
 #include "MS5611.h"
@@ -11,8 +25,9 @@
 /*
  * Load up device default settings
  *
- * input: MS5611 struct instance
- * output: HAL_OK if no errors happen
+ *	input: MS5611 struct instance
+ *
+ *	output: HAL_OK if no errors happen
  */
 HAL_StatusTypeDef MS5611_Defaults(MS5611 *dev){
 
@@ -40,10 +55,10 @@ HAL_StatusTypeDef MS5611_Defaults(MS5611 *dev){
 /*
  * A wrapper function to make working with HAL_I2C_Mem_Read easier
  *
- * input: MS5611 struct instance, Register address to be read,\
- * 		 A reference to a 8 bit variable to write retrieved register to
+ *	input: MS5611 struct instance, Register address to be read,\
+ *		A reference to a 8 bit variable to write retrieved register to
  *
- * 	output: returns the status of HAL_I2C_Mem_Read
+ *	output: returns the status of HAL_I2C_Mem_Read
  */
 HAL_StatusTypeDef MS5611_ReadRegister(MS5611 *dev, uint8_t reg, uint8_t *data){
 
@@ -54,11 +69,11 @@ HAL_StatusTypeDef MS5611_ReadRegister(MS5611 *dev, uint8_t reg, uint8_t *data){
 /*
  * A wrapper function to make working with HAL_I2C_Mem_Read easier
  *
- * input: MS5611 struct instance, Register address to be read,\
- * 		 A reference to a 8 bit variable to write retrieved register to,
- * 		 length of the data (number of registers to be read)
+ *	input: MS5611 struct instance, Register address to be read,\
+ *		A reference to a 8 bit variable to write retrieved register to,
+ *		length of the data (number of registers to be read)
  *
- * 	output: returns the status of HAL_I2C_Mem_Read
+ *	output: returns the status of HAL_I2C_Mem_Read
  */
 HAL_StatusTypeDef MS5611_ReadRegisters(MS5611 *dev, uint8_t reg, uint8_t *data, uint8_t len){
 
@@ -69,10 +84,10 @@ HAL_StatusTypeDef MS5611_ReadRegisters(MS5611 *dev, uint8_t reg, uint8_t *data, 
 /*
  * A wrapper function to make working with HAL_I2C_Mem_Write easier
  *
- * input: MS5611 struct instance, Register address to be written,\
- * 		 A reference to a 8 bit variable to write into the register
+ *	input: MS5611 struct instance, Register address to be written,\
+ *		A reference to a 8 bit variable to write into the register
  *
- * 	output: returns the status of HAL_I2C_Mem_Write
+ *	output: returns the status of HAL_I2C_Mem_Write
  */
 HAL_StatusTypeDef MS5611_WriteRegister(MS5611 *dev, uint8_t reg, uint8_t *data){
 
@@ -83,9 +98,9 @@ HAL_StatusTypeDef MS5611_WriteRegister(MS5611 *dev, uint8_t reg, uint8_t *data){
 /*
  * A wrapper function to make working with  HAL_I2C_Master_Transmit easier
  *
- * input: MS5611 struct instance, Command to be written
+ *	input: MS5611 struct instance, Command to be written
  *
- * 	output: returns the status of HAL_I2C_Mem_Write
+ *	output: returns the status of HAL_I2C_Mem_Write
  */
 HAL_StatusTypeDef MS5611_WriteCommand(MS5611 *dev, uint8_t cmd){
 
@@ -97,9 +112,9 @@ HAL_StatusTypeDef MS5611_WriteCommand(MS5611 *dev, uint8_t cmd){
 /*
  * A wrapper function to make working with  HAL_I2C_Master_Receive easier
  *
- * input: MS5611 struct instance, data will returned in this, data buffer size to be read
+ *	input: MS5611 struct instance, data will returned in this, data buffer size to be read
  *
- * 	output: returns the status of HAL_I2C_Mem_Write
+ *	output: returns the status of HAL_I2C_Mem_Write
  */
 HAL_StatusTypeDef MS5611_ReadCommand(MS5611 *dev, uint8_t *data, uint8_t len){
 
@@ -109,9 +124,9 @@ HAL_StatusTypeDef MS5611_ReadCommand(MS5611 *dev, uint8_t *data, uint8_t len){
 /*
  * Set restart bit value
  *
- * input: MS5611 struct instance , restart bit value
+ *	input: MS5611 struct instance , restart bit value
  *
- * 	output: returns the status based on HAL_StatusTypeDef
+ *	output: returns the status based on HAL_StatusTypeDef
  */
 HAL_StatusTypeDef MS5611_Reset(MS5611 *dev){
 
@@ -122,16 +137,20 @@ HAL_StatusTypeDef MS5611_Reset(MS5611 *dev){
 /*
  * Initialize MS5611 with reset, resets the sensor and reads the calibration values
  *
- * input: MS5611 struct instance , i2c handle which the device is on
+ *	input: MS5611 struct instance , i2c handle which the device is on
  *
- * 	output: returns the status based on HAL_StatusTypeDef
+ *	output: returns the status based on HAL_StatusTypeDef
  */
 HAL_StatusTypeDef MS5611_Init(MS5611 *dev, I2C_HandleTypeDef *i2cHandle){
 
+	//Pass i2c handle to device instance
 	dev->i2cHandle = i2cHandle;
+
+	//Reset the device and wait proper amount (more than 15ms)
 	MS5611_Reset(dev);
 	HAL_Delay(50);
 
+	//Read calibration bytes from the device and store them in device instance
 	uint16_t calibData[6];
 	uint8_t buff[2];
     for (int i=0;i<6;i++){
@@ -153,12 +172,21 @@ HAL_StatusTypeDef MS5611_Init(MS5611 *dev, I2C_HandleTypeDef *i2cHandle){
 }
 
 
-
+/*
+ * Get the temperature value from the device and convert it
+ *
+ *	input: MS5611 struct instance
+ *
+ *	output: returns int value (with out float conversion) of
+ *			temperature
+ */
 int MS5611_GetTemp(MS5611 *dev){
 
+	//Start recording temperature value
     MS5611_WriteCommand(dev, dev->D2_OSR);
     HAL_Delay(250);
 
+    //Read ADC output value and store it in D2 variable of Device instance
     uint8_t buff[3];
     MS5611_ReadRegisters(dev, MS5611_ADC_READ, buff, 3);
 
@@ -167,35 +195,47 @@ int MS5611_GetTemp(MS5611 *dev){
     dev->D2 = dev->D2<<8 | buff[1];
     dev->D2 = dev->D2<<8 | buff[2];
 
+    //P.8 of datasheet. Convert raw value to Temperature
     int dT = dev->D2 - ((int)dev->C5 << 8);
     int tmp = (2000 + (((int64_t)dT * (int64_t)dev->C6) >> 23));
     int	T2;
 
+    //P.9 of datasheet. SECOND ORDER TEMPERATURE COMPENSATION
     if (tmp<2000){
       T2=pow(dT,2)/2147483648;
     }else{
           T2=0;
      }
 
+    //Calculate compensated temperature
 	int temp = ((2000 + (((int64_t)dT * (int64_t)dev->C6) >> 23))-T2);
+
+	//Write temperature to device instance temp variable
 	dev->temp = (float)temp/100;
+
 	return temp;
 
 }
 
-
-
-
+/*
+ * Get the pressure value from the device and convert it
+ *
+ *	input: MS5611 struct instance
+ *
+ *	output: returns int value (with out float conversion) of
+ *			pressure
+ */
 int MS5611_GetPressure(MS5611 *dev){
 
 	int64_t OFF, OFF2, SENS, SENS2;
 	int dT, temp, T2, pressure;
 	uint8_t buff[3];
 
+	//Start recording pressure value
     MS5611_WriteCommand(dev, dev->D1_OSR);
     HAL_Delay(250);
 
-
+    //Read ADC output value and store it in D1 variable of Device instance
     MS5611_ReadRegisters(dev, MS5611_ADC_READ, buff, 3);
 
     dev->D1 = 0;
@@ -203,9 +243,11 @@ int MS5611_GetPressure(MS5611 *dev){
     dev->D1 = dev->D1<<8 | buff[1];
     dev->D1 = dev->D1<<8 | buff[2];
 
+    //Start recording temperature value
     MS5611_WriteCommand(dev, dev->D2_OSR);
     HAL_Delay(250);
 
+    //Read ADC output value and store it in D2 variable of Device instance
     buff[0]=0,buff[1]=0,buff[2]=0;
     MS5611_ReadRegisters(dev, MS5611_ADC_READ, buff, 3);
 
@@ -214,9 +256,11 @@ int MS5611_GetPressure(MS5611 *dev){
     dev->D2 = dev->D2<<8 | buff[1];
     dev->D2 = dev->D2<<8 | buff[2];
 
+    //P.8 of datasheet. Convert raw value to Temperature
     dT = dev->D2 - ((int)dev->C5 << 8);
     int tmp = (2000 + (((int64_t)dT * (int64_t)dev->C6) >> 23));
 
+    //P9 of datasheet. SECOND ORDER TEMPERATURE COMPENSATION
     if(tmp<2000){
     	T2=pow(dT,2)/2147483648;
     	OFF2=5*pow((tmp-2000),2)/2;
@@ -232,18 +276,17 @@ int MS5611_GetPressure(MS5611 *dev){
 		SENS2=0;
 	}
 
-	  temp = ((2000 + (((int64_t)dT * (int64_t)dev->C6) >> 23))-T2);
-	  OFF = (((unsigned int)dev->C2 << 16) + (((int64_t)dev->C4 * dT) >> 7)-OFF2);
-	  SENS = (((unsigned int)dev->C1 << 15) + (((int64_t)dev->C3 * dT) >> 8)-SENS2);
-	  pressure = (((dev->D1 * SENS) >> 21) - OFF) >> 15;
+    //Calculate compensated pressure value and temperature
+    temp = ((2000 + (((int64_t)dT * (int64_t)dev->C6) >> 23))-T2);
+	OFF = (((unsigned int)dev->C2 << 16) + (((int64_t)dev->C4 * dT) >> 7)-OFF2);
+	SENS = (((unsigned int)dev->C1 << 15) + (((int64_t)dev->C3 * dT) >> 8)-SENS2);
+	pressure = (((dev->D1 * SENS) >> 21) - OFF) >> 15;
 
-	  dev->temp = (float)temp/100;
-	  dev->pressure = (float)pressure/100;
+	//Write temperature to device instance temp variable
+	dev->temp = (float)temp/100;
+	//Write pressure to device instance pressure variable
+	dev->pressure = (float)pressure/100;
 
-	  return pressure;
+	return pressure;
 
 }
-
-
-
-
